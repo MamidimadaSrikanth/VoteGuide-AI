@@ -106,6 +106,18 @@ How It Works:-
   * `timeline.py`
 * Response is returned and displayed dynamically
 
+Testing:-
+Run:
+pytest
+
+Security:-
+- Input validation implemented
+- Safe JSON parsing
+- Error handling
+
+Google Services:-
+- Integrated Google Maps for polling booth discovery
+
 Assumptions:-
 * User is interacting for Indian elections
 * Internet connection is available
@@ -134,4 +146,7 @@ Author:-
 Mamidimada Srikanth
 mamidimadasrikanth143@gmail.com (mailto:mamidimadasrikanth143@gmail.com)
 🔗 https://www.linkedin.com/in/mamidimada-srikanth-68aa20289
+
+Project Post Link:-
+https://www.linkedin.com/posts/mamidimada-srikanth-68aa20289_github-mamidimadasrikanthvoteguide-ai-activity-7456710925107257344-cxKZ?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEYYrcoBHq0S6h2ctz10s-GH4UShWC8Wkdo
 
