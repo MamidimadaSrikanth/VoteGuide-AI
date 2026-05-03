@@ -40,6 +40,7 @@ Polling Booth Finder:-
 * Integrated Google Maps to locate nearby polling booths
 
 Tech Stack:-
+        
         * Backend
              1) Python
              2) Flask
