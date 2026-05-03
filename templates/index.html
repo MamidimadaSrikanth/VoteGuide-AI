@@ -14,7 +14,7 @@
 
 <body style="background-color: #f4f4f4;">
 
-    <h1>🗳️ VoteGuide AI</h1>
+    <h1>VoteGuide AI</h1>
     <p class="tagline">Your smart assistant for Indian elections</p>
 
     <!-- ================= CHAT SECTION ================= -->
@@ -22,14 +22,12 @@
 
         <div id="messages" aria-live="polite"></div>
 
-        <!-- Input with label -->
         <label for="userInput">Ask a Question</label>
         <input type="text" id="userInput" aria-label="User input"
             placeholder="Ask about voting, eligibility, registration...">
 
         <br>
 
-        <!-- Buttons -->
         <button id="btn-speak" aria-label="Speak input" onclick="startVoice()">🎤 Speak</button>
         <button id="btn-send" aria-label="Send message" onclick="sendMessage()">Send ➤</button>
 
@@ -69,7 +67,8 @@
     <!-- ================= MAP ================= -->
     <h2>Find Polling Booth</h2>
 
-    <iframe title="Polling booth location map" width="560" height="400" loading="lazy" style="border:0"
+    <!--  FINAL GOOGLE MAP (NO API NEEDED) -->
+    <iframe title="Polling booth location map" width="100%" height="400" style="border:0" loading="lazy"
         src="https://www.google.com/maps?q=polling+booth+near+me&output=embed">
     </iframe>
 

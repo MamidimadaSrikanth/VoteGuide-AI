@@ -2,10 +2,12 @@ from flask import Flask, render_template, request, jsonify
 from chatbot import chatbot_response
 from utils.eligibility import check_eligibility
 from utils.timeline import get_timeline
+from functools import lru_cache   # ✅ caching
 import os
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 
 # ---- Helpers ----
 def safe_json(req):
@@ -17,17 +19,28 @@ def safe_json(req):
 def bad_request(msg="Invalid request"):
     return jsonify({"error": msg}), 400
 
+
+# ---- CACHED FUNCTION ----
+@lru_cache(maxsize=10)
+def cached_timeline():
+    return get_timeline()
+
+
 # ---- Routes ----
 @app.route("/")
 def home():
     return render_template("index.html")
 
+
 @app.route("/health")
 def health():
     return jsonify({"status": "ok"}), 200
 
+
 @app.route("/chat", methods=["POST"])
 def chat():
+    """Handles chatbot responses"""
+
     data = safe_json(request)
     user_input = (data.get("message") or "").strip()
 
@@ -39,6 +52,7 @@ def chat():
         return jsonify({"response": response}), 200
     except Exception:
         return jsonify({"response": "Something went wrong"}), 500
+
 
 @app.route("/eligibility", methods=["POST"])
 def eligibility():
@@ -63,9 +77,12 @@ def eligibility():
     result = check_eligibility(age, citizen)
     return jsonify({"result": result}), 200
 
+
+# ---- TIMELINE (CACHED) ----
 @app.route("/timeline")
 def timeline():
-    return jsonify(get_timeline()), 200
+    return jsonify(cached_timeline()), 200
+
 
 # ---- Entry ----
 if __name__ == "__main__":

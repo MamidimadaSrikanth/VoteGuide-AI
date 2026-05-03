@@ -1,4 +1,4 @@
-//Voice Input Function
+// ================= VOICE INPUT =================
 function startVoice() {
     if (!('webkitSpeechRecognition' in window)) {
         alert("Voice not supported in this browser");
@@ -11,13 +11,13 @@ function startVoice() {
     recognition.onresult = function (event) {
         let text = event.results[0][0].transcript;
         document.getElementById("userInput").value = text;
-        sendMessage(); // auto send
+        sendMessage();
     };
 
     recognition.start();
 }
 
-//Chat Function
+// ================= CHAT =================
 async function sendMessage() {
     let input = document.getElementById("userInput").value;
 
@@ -34,7 +34,7 @@ async function sendMessage() {
         "<p><b>Bot:</b> " + data.response + "</p>";
 }
 
-//Eligibility
+// ================= ELIGIBILITY =================
 async function checkEligibility() {
     let age = document.getElementById("age").value;
     let citizen = document.getElementById("citizen").value;
@@ -49,7 +49,7 @@ async function checkEligibility() {
     alert(data.result);
 }
 
-//Timeline
+// ================= TIMELINE =================
 async function getTimeline() {
     let res = await fetch("/timeline");
     let data = await res.json();
@@ -58,5 +58,22 @@ async function getTimeline() {
     for (let key in data) {
         output += "<p>" + key + ": " + data[key] + "</p>";
     }
+
     document.getElementById("timeline").innerHTML = output;
+}
+
+// ================= GOOGLE MAP =================
+function initMap() {
+    const location = { lat: 17.385044, lng: 78.486671 };
+
+    const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 10,
+        center: location,
+    });
+
+    new google.maps.Marker({
+        position: location,
+        map: map,
+        title: "Polling Booth"
+    });
 }
